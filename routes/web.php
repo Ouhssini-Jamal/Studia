@@ -29,4 +29,5 @@ Route::post('/dashboard', [ ImageUploadController::class, 'imageUploadPost' ])->
 Route::post('/d', [UpdateUserInfoController::class, 'updatename'])->middleware(['auth'])->name('updatename');
 route::post('/a', [UpdateUserInfoController::class, 'updateemail'])->middleware(['auth'])->name('updateemail');
 route::post('/s', [UpdateUserInfoController::class, 'updatepassword'])->middleware(['auth'])->name('updatepassword');
+
 require __DIR__.'/auth.php';
