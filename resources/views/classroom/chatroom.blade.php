@@ -22,40 +22,42 @@
       <link rel="shortcut icon" href="/imgs/studia1.png"/>
   </head>
 <body onload="pull();" class="view-body">
-        @include('components.menu')
-          <div style= >@include('components.sidebar1')</div>
+@include('components.menu')
+          <div style= >@include('components.sidebar1')</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
           <div class="container" style="height:700px" style="position:relative;">
           <div class="class_title mx-auto text-center w-50 mb-3"> <h1>Chat</h1></div>
+           @if ($message = Session::get('success'))
+                        <div class="alert mx-auto w-50 mt-3 text-center alert-success alert-block">
+                                <strong>{{ $message }}</strong>
+                        </div>
+                @endif
             <div class="msg w-75 h-75 ps-4 pt-4 pe-4 mx-auto bg-white">
             @if(!is_null($last))
             <input type="hidden" id="last" value="{{$last->id}}" name="msg">
             @endif
                 @foreach($messages as $msg)
                 @if(Auth::user()->id == $msg->user->id)
-                <div class="mb-2"><img src="/imgs/pdp/{{$msg->user->image}}" class="me-2" style="width:32px;height:32px;border-radius:50%;"><span>me </span><div id="msg_body" class="" style="background-color: #64a3ff;">{{$msg->body}}</div></div>
-                @else <div class="mb-2"><img src="/imgs/pdp/{{$msg->user->image}}" class="me-2" style="width:32px;height:32px;border-radius:50%;">@if($msg->user->hasRole('teacher'))<strong><span>{{$msg->user->fname.' '.$msg->user->lname}} </span></strong>@else <span>{{$msg->user->fname.' '.$msg->user->lname}} </span>@endif<div id="msg_body" style="background-color: aqua;">{{$msg->body}}</div></div>
+                <div class="mb-2"><img src="/imgs/pdp/{{$msg->user->image}}" class="me-2" style="width:32px;height:32px;border-radius:50%;"><span>me </span><div id="msg_body" class="" style="background-color: #64a3ff;">{{$msg->body}}</div>
+                </div>
+                @else<div class="mb-2" ><img src="/imgs/pdp/{{$msg->user->image}}" class="me-2" style="width:32px;height:32px;border-radius:50%;"><span>{{$msg->user->fname.' '.$msg->user->lname}} </span><div id="msg_body" style="background-color: aqua;"> {{$msg->body}} @if($msg->body != 'message has been deleted by admin')<img id ="more{{$msg->id}}" data-bs-toggle="dropdown" class="more-drop" src="/imgs/more.png"><div class="dropdown-menu dropdown-menu-end"><form class="" action="/classes/report/{{$msg->id}}" method="POST"> @csrf<div class="text-center link_container"><button type="submit"  id="button" class="btn-rep">Report</button></div></form></div>@endif</div>
+                </div>
                 @endif
                 @endforeach
             </div>
             <div class="mx-auto w-75">
+            @foreach($classroom->chatters as $chatter)
+            @if(Auth::user()->id == $chatter->id)
             <form class="msg-form text-center">
                     <input type="text" name="body" style="width:100%;" placeholder="write a message" required >
                     <input type="hidden" name="user_id" value="{{auth::user()->id}}" placeholder="write a message" >
                     <input type="hidden" name="classroom_id" onfocus="this.value=''" placeholder="write a message" value="{{$classroom->id}}" required >
                     <button type="submit" class="btn1 btn-primary btn ">send</button>
                 </form>
+                @endif
+                @endforeach
             </div> 
             <input type="hidden" id="clas" value="{{$classroom->id}}">
             <input type="hidden" class="user" value="{{Auth::user()->id}}">
-            <!-- <div>
-            <form class="boxform">
-            <label class="switch">
-              <input type="checkbox" name="checkbox1">
-              <span class="slider round"></span>
-            </label>
-            </form>
-            </div>
-        </div> -->
 <script>
         $.ajaxSetup({
         headers: {
@@ -94,8 +96,7 @@ function pull() {
                 $("#last").val(response.ide);
                 if(response.message != null && response.user != null) {
                   if(response.user.id == user_id) $('.msg').append('<div class="mb-2" ><img src="/imgs/pdp/'+response.user.image+'" class="me-2" style="width:32px;height:32px;border-radius:50%;"><span>me </span> <div id="msg_body" style="background-color: #64a3ff;"> '+response.message.body+'</div></div>');
-                  else if(response.user.id == response.class_owner.id)  $('.msg').append('<div class="mb-2" ><img src="/imgs/pdp/'+response.user.image+'" class="me-2" style="width:32px;height:32px;border-radius:50%;"><strong><span>'+response.user.fname+' '+response.user.lname+' </span></strong><span id="msg_body" style="background-color: aqua;"> '+response.message.body+'</span></div>');
-                  else $('.msg').append('<div class="mb-2" ><img src="/imgs/pdp/'+response.user.image+'" class="me-2" style="width:32px;height:32px;border-radius:50%;"><span>'+response.user.fname+' '+response.user.lname+' </span><div id="msg_body" style="background-color: aqua;"> '+response.message.body+'</div></div>');
+                  else $('.msg').append('<div class="mb-2" ><img src="/imgs/pdp/'+response.user.image+'" class="me-2" style="width:32px;height:32px;border-radius:50%;"><span>'+response.user.fname+' '+response.user.lname+' </span><div id="msg_body" style="background-color: aqua;"> '+response.message.body+'<img id ="more'+response.message.id+'" data-bs-toggle="dropdown" class="more-drop" src="/imgs/more.png"><div class="dropdown-menu dropdown-menu-end"><form class="" action="/classes/report/'+response.message.id+'" method="POST"> <input type="hidden" name="_token" value="SfbL8veQoxVxFgzexeQCol4SX0CYzvxF6wEoM4Fv"><div class="text-center link_container"><button type="submit"  id="button" class="btn-rep">Report</button></div></form></div></div></div></div></div>');
                   chatHistory.scrollTop = chatHistory.scrollHeight;
                 }
             }

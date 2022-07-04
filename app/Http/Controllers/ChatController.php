@@ -49,4 +49,36 @@ class ChatController extends Controller
         }
          return response()->json(['user' => $user,'message' => $message,'ide' => $ide,'class_owner' => $class_owner]);
     }
+    public function report($id){
+        $msg = Msg::find($id);
+        $msg->is_reported = true;
+        $msg->save();
+        return back()->with('success','You have successfully reported the message.');
+    }
+    public function report_show($id){
+        $classroom = Classroom::find($id);
+        $msgs = $classroom->reported_msgs;
+        $i=1;
+        return view('classroom.reported_messages',compact('msgs','classroom','i'));
+    }
+    public function prevent_chat($id1,$id,$id2){
+        $classroom = Classroom::find($id1);
+        $user = User::find($id);
+        $msg = Msg::find($id2);
+        $msg->body = "message has been deleted by admin";
+        $msg->is_reported = false;
+        $msg->save();
+        $classroom->users()->detach($id);
+        $classroom->users()->attach($id,[
+            'valid' => 1,
+            'is_allowed_chat' => 0,
+        ]);
+        return back()->with('success','You have successfully prevented this user from chatting.');
+    }
+    public function ignore($id){
+        $msg = Msg::find($id);
+        $msg->is_reported = false;
+        $msg->save();
+        return back();
+    }
 }

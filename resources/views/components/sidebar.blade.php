@@ -11,7 +11,7 @@
     <a class="sidenav-a" href="{{route('members',['id' => $classroom->id])}}">Members  <img src="{{url('/imgs/community.png')}}"></a>
     </li>
     <li  class="list-group-item text-center"> 
-    <a class="sidenav-a" href="{{route('chat_show',['id' => $classroom->id])}}">Chat Room <img src="{{url('/imgs/chat1.png')}}"></a>
+    <a class="sidenav-a" href="{{route('report_show',['id' => $classroom->id])}}">Chat Room <img src="{{url('/imgs/chat1.png')}}"></a>
     </li>
       <li  class="list-group-item text-center">
         <a href="{{route('settings',['id' => $classroom->id])}}" class="sidenav-a">Settings  <img src="{{url('/imgs/setting.png')}}"></a>

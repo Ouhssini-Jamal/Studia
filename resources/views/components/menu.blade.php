@@ -16,7 +16,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="/profile"><img src="/imgs/profile.png"> Profile</a>
               </li>
-              @if(Auth::user()->hasRole('student'))
+              
               <li class="nav-item">
                 
             <form action="{{Route('search_classroom')}}" role="search" method="get" class="form-inline  d-flex" style="margin-top:10px">
@@ -26,7 +26,6 @@
             </form>
                 
               </li>
-              @endif
             </ul>
             <div class=" dropdown show-drop-down">
                 <div class="dropdown-toggle profile p-2" data-bs-toggle="dropdown" >

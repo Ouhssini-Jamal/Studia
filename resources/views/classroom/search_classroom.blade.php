@@ -68,6 +68,7 @@
                     
                 </div>
                 @endforeach
+                <div class="mx-auto col-12"><h3 class="class_title mx-auto mb-4" style="width:300px">Your classrooms</h3></div>
                     @foreach($stud_classrooms as $classroom)
                     <div class="col-md-6 mb-5 text-center show-drop-down dropdown">
                        <div class="c1 class-div w-75 h-100 mx-auto"  style="background-image: url('/imgs/classes_covers/{{$classroom->image}}');background-repeat: no-repeat;

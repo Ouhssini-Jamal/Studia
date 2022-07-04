@@ -28,6 +28,14 @@
             <div class="class_title mx-auto text-center w-50">
                 <h1  style="color:black">{{$classroom->name}} </h1>
             </div>
+            <div class="mx-auto text-center" style=" margin-top: 20px;">
+              @if($classroom->average >= 1 && $classroom->average < 2)<img src="/imgs/1.png" style="wdith:100px">
+              @elseif($classroom->average  >= 2 && $classroom->average < 3) <img src="/imgs/2.png" style="wdith:100px">
+              @elseif($classroom->average  >= 3 && $classroom->average  < 4) <img src="/imgs/3.png" style="wdith:100px">
+              @elseif($classroom->average  >= 4 && $classroom->average  < 5) <img src="/imgs/4.png" style="wdith:100px">
+              @elseif($classroom->average  == 5) <img src="/imgs/5.png" style="wdith:100px">
+              @endif
+            </div>
                 @if ($message = Session::get('success'))
                         <div class="alert mx-auto w-50 mt-3 text-center alert-success alert-block">
                                 <strong>{{ $message }}</strong>

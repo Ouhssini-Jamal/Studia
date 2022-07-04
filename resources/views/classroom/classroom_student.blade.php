@@ -118,7 +118,7 @@
                       <div class="dropdown-menu dropdown-menu-end">
                        <div class="">
                        <div class="text-center link_container"><button data-bs-toggle="modal" data-bs-target="#a{{$post->id}}" id="buttone">Edit</button></div>
-                       </div><hr >
+                       </div><hr>
                         <div class=""> <form action="{{Route('delete.post',['id' => $post->id])}}" id="myform2" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }} 

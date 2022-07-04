@@ -7,6 +7,7 @@ use App\Models\Classroom;
 use App\Models\course;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\msg;
 use App\Models\rating;
 use Illuminate\Support\Facades\File;
 class classroomController extends Controller
@@ -255,7 +256,9 @@ class classroomController extends Controller
     }
     public function search(Request $request){
         $key = trim($request->name);
+        if(auth::user()->hasRole("student"))
         $classrooms1 = auth::user()->classrooms;
+        else $classrooms1 = auth::user()->classrooms1;
         $classrooms = classroom::query()
             ->where('name', 'like', "%{$key}%")
             ->orderBy('is_public', 'desc')
@@ -270,10 +273,6 @@ class classroomController extends Controller
         $classroom= classroom::find($id);
         $average=0;
         $sum=0;
-        foreach($ratings as $rating){
-            if($rating->classroom->id == $id) return back()
-            ->withErrors(['you have already rated this classroom']);
-        }
         $request->validate([
             'rating'=>'required',
         ]);
@@ -299,14 +298,15 @@ class classroomController extends Controller
          $classrooms1 = $classrooms->take(3);
         return view('classroom.description',compact('classroom','classrooms1'));
     }
-    public function change_status(request $request,$id)
-    {
-        $class = classroom::find($id);
-        if($request->checkbox1 == 'on'){
-            $class->chat_status = true;
-        }
-        else $class->chat_status = false;
-        $class->save();
+    public function remove_member1($id1,$id,$id2){
+        $classroom = classroom::find($id1);
+        $classroom->users()->detach($id);
+        $msg = Msg::find($id2);
+        $msg->body = "message has been deleted by admin";
+        $msg->is_reported = false;
+        $msg->save();
+        return back()
+        ->with('success','You have successfully removed the student.');
     }
 }
     

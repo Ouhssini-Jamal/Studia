@@ -39,6 +39,12 @@ class classroom extends Model
         return $this->hasMany(rating::class);
     }
     public function messages(){
-        return $this->hasMany(msg::class);
+        return $this->hasMany(Msg::class);
+    }
+    public function reported_msgs(){
+        return $this->hasMany(Msg::class)->where('is_reported',1);
+    }
+    public function chatters(){
+        return $this->belongsToMany(User::class , 'join_classroom')->wherePivot('is_allowed_chat', 1);
     }
 }

@@ -20,6 +20,10 @@ Route::group(['middleware' => ['auth','role:teacher']], function() {
     Route::post('/classes/update/code/{id}',[ClassroomController::class, 'update_class_code'])->name('update.class.code');
     Route::post('/classes/update/desc/{id}',[ClassroomController::class, 'update_class_desc'])->name('update.class.desc');
     Route::get('/classes/settings/{id}', [ClassroomController::class, 'settings'])->name('settings');  
+    Route::get('/classes/reported_msgs/{id}', [ChatController::class, 'report_show'])->name('report_show');
+    Route::POST('/classes/prevent/{id1}/{id}/{id2}', [ChatController::class, 'prevent_chat'])->name('prevent_chat');
+    Route::post('/classes/members/remove/{id1}/{id}/{id2}',[ClassroomController::class, 'remove_member1'])->name('remove_member1');
+    Route::POST('/classes/ignore/{id}', [ChatController::class, 'ignore'])->name('its_ok');
 });
 Route::group(['middleware' => ['auth','role:student']], function() {
     Route::post('/classes/rate/{id}',[ClassroomController::class, 'rate'])->name('rate');
@@ -27,13 +31,14 @@ Route::group(['middleware' => ['auth','role:student']], function() {
     route::post('/join_classroom', [ClassroomController::class, 'join']);
     route::post('/join_classroom/{id}', [ClassroomController::class, 'join_public'])->name('join_public');
     Route::post('/classes/withdraw/{id}',[ClassroomController::class, 'withdraw'])->name('withdraw');
-    Route::get('/search_classroom', [ClassroomController::class, 'search'])->name('search_classroom');
     Route::post('/classes/withdraw1/{id}',[ClassroomController::class, 'withdraw1'])->name('withdraw1');
-});
-Route::POST('/classes/data/{id}', [ChatController::class, 'change_status'])->name('change_status');
-Route::POST('/classes/data/{id}/{id1}', [ChatController::class, 'get_messages'])->name('get_messages');
-Route::get('/classes/chatroom/{id}', [ChatController::class, 'chat_show'])->name('chat_show');
+    Route::get('/classes/chatroom/{id}', [ChatController::class, 'chat_show'])->name('chat_show');
+Route::POST('/classes/report/{id}', [ChatController::class, 'report'])->name('report');
 Route::post('/classes/send_msg/{id}',[ChatController::class, 'send'])->name('send');
+Route::POST('/classes/data/{id}/{id1}', [ChatController::class, 'get_messages'])->name('get_messages');
+});
+Route::get('/search_classroom', [ClassroomController::class, 'search'])->name('search_classroom');
+Route::POST('/classes/data/{id}', [ChatController::class, 'change_status'])->name('change_status');
 Route::get('/courses/download/{name}',[ClassroomController::class, 'download'])->name('download')->middleware('auth');
 Route::get('/classes/{id}',[ClassroomController::class, 'index1'])->name('class_view')->middleware('auth');
 Route::get('/classes/courses/{id}', [ClassroomController::class, 'courseUpload'])->middleware('auth')->name('Course.upload');
