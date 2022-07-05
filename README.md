@@ -13,5 +13,5 @@ The users of this platform are divided into two types :
 * He can post/comment/direct message in all classrooms he joined.  
 * He can rate the classrooms he joined.  
 * He has the right to look for any classroom from the search bar.  
-* He can update his profile freely.   
-[here is the platform's link](https://studia1234.000webhostapp.com/).
+* He can update his profile freely.          
+[here is the platform's link](https://studia1234.000webhostapp.com/).  
