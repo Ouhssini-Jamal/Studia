@@ -22,3 +22,15 @@ There are two types of users on this platform:
 - They have the ability to rate the classrooms they've attended.
 - They can use the search bar to find specific classrooms.
 - Like tutors, learners also have the freedom to update their profiles.
+- 
+### Technologies Used
+
+- **Frontend**:
+  - HTML: For structuring the web pages.
+  - CSS/Bootstrap: For styling and responsive design.
+  - JavaScript: For dynamic and interactive features.
+  - Ajax: For asynchronous data retrieval.
+  - jQuery: For simplifying DOM manipulation and event handling.
+
+- **Backend**:
+  - Laravel.
