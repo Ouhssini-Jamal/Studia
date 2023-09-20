@@ -1,18 +1,24 @@
-# Studia
-This website is designed to be an elearning platform that helps every person who has intention to teach people something; this platform is kind of a social media that's specialized in elearning.  
-The users of this platform are divided into two types :  
-1. Tutor:
+## Studia
 
-*They can create a classroom with public/private choice.
-*They can upload their courses in a chosen classroom.
-*They have full control over the people who join their classrooms.
-*They can post assignments to their learners.
-*They can update their profile freely.
-2. Learner:
+Studia is an e-learning platform designed to assist individuals who wish to share their knowledge. This platform functions as a specialized social media platform focused on e-learning.
 
-*They can join any public classroom, but they need the classroom's code if it's private.
-*They have access to all courses of classrooms they're a member of.
-*They can post/comment/direct message in all classrooms they joined.
-*They can rate the classrooms they joined.
-*They have the right to look for any classroom from the search bar.
-*They can update their profile freely.
+### User Types
+
+There are two types of users on this platform:
+
+#### Tutors
+
+- They have the ability to create classrooms, choosing between public and private settings.
+- Tutors can upload their courses to the classrooms they've created.
+- They maintain full control over the members who join their classrooms.
+- Tutors can assign tasks and assignments to their learners.
+- They have the freedom to update their profiles.
+
+#### Learners
+
+- Learners can join public classrooms without restrictions. For private classrooms, they need the classroom's access code.
+- They have access to all courses within the classrooms they are members of.
+- Learners can actively participate by posting, commenting, and sending direct messages in all the classrooms they have joined.
+- They have the ability to rate the classrooms they've attended.
+- They can use the search bar to find specific classrooms.
+- Like tutors, learners also have the freedom to update their profiles.
