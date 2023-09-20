@@ -33,4 +33,4 @@ There are two types of users on this platform:
   - jQuery: For simplifying DOM manipulation and event handling.
 
 - **Backend**:
-  - Laravel.
+  - Laravel framework, MySQL.
