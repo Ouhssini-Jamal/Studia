@@ -22,7 +22,6 @@ There are two types of users on this platform:
 - They have the ability to rate the classrooms they've attended.
 - They can use the search bar to find specific classrooms.
 - Like tutors, learners also have the freedom to update their profiles.
-- 
 ### Technologies Used
 
 - **Frontend**:
